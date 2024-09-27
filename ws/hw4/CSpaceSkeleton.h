@@ -10,12 +10,14 @@
 class MyGridCSpace2D : public amp::GridCSpace2D {
     public:
         MyGridCSpace2D(std::size_t x0_cells, std::size_t x1_cells, double x0_min, double x0_max, double x1_min, double x1_max)
-            : amp::GridCSpace2D(x0_cells, x1_cells, x0_min, x0_max, x1_min, x1_max) // Call base class constructor
+            : amp::GridCSpace2D(x0_cells, x1_cells, x0_min, x0_max, x1_min, x1_max),
+            m_x0_cells(x0_cells) // Call base class constructor
         {}
 
         // Override this method for determining which cell a continuous point belongs to
         virtual std::pair<std::size_t, std::size_t> getCellFromPoint(double x0, double x1) const override;
-
+    private:
+    std::size_t m_x0_cells;
 };
 
 // Derive the HW4 ManipulatorCSConstructor class and override the missing method
@@ -26,6 +28,12 @@ class MyManipulatorCSConstructor : public amp::ManipulatorCSConstructor {
 
         // Override this method for computing all of the boolean collision values for each cell in the cspace
         virtual std::unique_ptr<amp::GridCSpace2D> construct(const amp::LinkManipulator2D& manipulator, const amp::Environment2D& env) override;
+        double crossProduct(const Eigen::Vector2d& a, const Eigen::Vector2d& b);
+        // doLineSegmentsIntersect 함수 선언
+        bool doLineSegmentsIntersect(const Eigen::Vector2d& p1, const Eigen::Vector2d& p2,
+                             const Eigen::Vector2d& q1, const Eigen::Vector2d& q2);
+        bool checkCollision(const Eigen::Vector2d& seg_p1, const Eigen::Vector2d& seg_p2,
+            const amp::Polygon& polygon);
 
     private:
         std::size_t m_cells_per_dim;
