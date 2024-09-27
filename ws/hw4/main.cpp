@@ -53,12 +53,12 @@ int main(int argc, char** argv) {
     Visualizer::makeFigure(manipulator_2b, test_IK_state); 
 
     // Create the collision space constructor
-    std::size_t n_cells = 1000;
+    std::size_t n_cells = 500;
     MyManipulatorCSConstructor cspace_constructor(n_cells);
     std::vector<double> link_lengths3 = {1.0, 1.0};
     MyManipulator2D manipulator_2c(link_lengths3);
     // Create the collision space using a given manipulator and environment
-    std::unique_ptr<amp::GridCSpace2D> cspace = cspace_constructor.construct(manipulator_2c, HW4::getEx3Workspace2());
+    std::unique_ptr<amp::GridCSpace2D> cspace = cspace_constructor.construct(manipulator_2c, HW4::getEx3Workspace3());
 
     // You can visualize your cspace 
     Visualizer::makeFigure(*cspace);

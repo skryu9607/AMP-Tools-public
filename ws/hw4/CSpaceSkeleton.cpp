@@ -4,12 +4,13 @@
 
 std::pair<std::size_t, std::size_t> MyGridCSpace2D::getCellFromPoint(double x0, double x1) const {
     // Implment your discretization procedure here, such that the point (x0, x1) lies within the returned cell
-    const double min_value = 0.0;
-    const double max_value = 2.0 * M_PI;
+    const double min_value = 0;
+    const double max_value = 2 * M_PI;
     std::size_t grid_resolution = m_x0_cells;
 
 
     // Discretize x0 and x1 into grid cells
+
     std::size_t cell_x = static_cast<std::size_t>((x0 - min_value) / (max_value - min_value) * grid_resolution);
     std::size_t cell_y = static_cast<std::size_t>((x1 - min_value) / (max_value - min_value) * grid_resolution);
 
@@ -30,7 +31,7 @@ bool MyManipulatorCSConstructor::doLineSegmentsIntersect(const Eigen::Vector2d& 
     double rxs = crossProduct(r, s);
     Eigen::Vector2d qp = q1 - p1;
     double qpxr = crossProduct(qp, r);
-    const double EPSILON = 1e-12;
+    const double EPSILON = 1e-4;
 
     if (std::abs(rxs) < EPSILON && std::abs(qpxr) < EPSILON) {
         double r_dot_r = r.dot(r);
@@ -69,7 +70,7 @@ bool MyManipulatorCSConstructor::doLineSegmentsIntersect(const Eigen::Vector2d& 
 
 bool MyManipulatorCSConstructor::checkCollision(const Eigen::Vector2d& seg_p1, const Eigen::Vector2d& seg_p2,
             const amp::Polygon& polygon) {
-    const std::vector<Eigen::Vector2d>& vertices = polygon.verticesCCW();
+    const std::vector<Eigen::Vector2d>& vertices = polygon.verticesCW();
     std::size_t num_vertices = vertices.size();
 
     for (std::size_t i = 0; i < num_vertices; ++i) {
@@ -102,8 +103,8 @@ std::unique_ptr<amp::GridCSpace2D> MyManipulatorCSConstructor::construct(const a
     amp::ManipulatorState state(2);
 
     // Loop over all cells in the grid
-    for (double x0 = 0; x0 < 2 * M_PI; x0 +=0.005) {
-        for (double  x1 = 0; x1 < 2 * M_PI; x1 +=0.005) {
+    for (double x0 = 0; x0 < 2* M_PI; x0 += M_PI/(2 * m_cells_per_dim)) {
+        for (double  x1 = 0; x1 < 2 * M_PI; x1 += M_PI/(2* m_cells_per_dim)) {
             joint_locations.clear();
             manipulator_segments.clear();
             state << x0, x1;
@@ -126,10 +127,10 @@ std::unique_ptr<amp::GridCSpace2D> MyManipulatorCSConstructor::construct(const a
                     collision = true;
                 }
             }
-            if (seg_p1[0]< env.x_min or seg_p1[0] > env.x_max or seg_p2[0]< env.x_min or seg_p2[0] > env.x_max){
+            if (seg_p1[0]<= env.x_min or seg_p1[0] >= env.x_max or seg_p2[0]<= env.x_min or seg_p2[0] >= env.x_max){
                 collision = true;
             }
-            if (seg_p1[1]< env.y_min or seg_p1[1] > env.y_max or seg_p2[1]< env.y_min or seg_p2[1] > env.y_max){
+            if (seg_p1[1]<= env.y_min or seg_p1[1] >= env.y_max or seg_p2[1]<= env.y_min or seg_p2[1] >= env.y_max){
                 collision = true;
             }
             if (collision) {
