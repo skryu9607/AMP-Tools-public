@@ -3,7 +3,7 @@
 
 MyManipulator2D::MyManipulator2D()
     : LinkManipulator2D({1.0,1.0}) // Default to a 2-link with all links of 1.0 length
-    //: LinkManipulator2D({1.0,0.5,1.0})
+    //: LinkManipulator2D({0.5,1.0,0.5})
 {}
 
 // Override this method for implementing forward kinematics
@@ -16,7 +16,7 @@ Eigen::Vector2d MyManipulator2D::getJointLocation(const amp::ManipulatorState& s
     }
     // Check if joint_index is valid
     if (joint_index > nLinks()) {
-        std::cerr << "Joint index " << joint_index << " out of range." << std::endl;
+        //std::cerr << "Joint index " << joint_index << " out of range." << std::endl;
         return Eigen::Vector2d::Zero();
     }
     std::vector<Eigen::Vector2d> joint_positions;
@@ -24,7 +24,7 @@ Eigen::Vector2d MyManipulator2D::getJointLocation(const amp::ManipulatorState& s
     Eigen::Vector2d current_position(0.0, 0.0);  // Base of the manipulator
 
     for (int i = 0; i < state.size(); i++) {
-        std::cout << "state(" << i << ") = " << state(i) << std::endl;
+        //std::cout << "state(" << i << ") = " << state(i) << std::endl;
     }
     // Initialize angles and positions for the joints
     double cumulative_angle = 0.0;
@@ -34,7 +34,7 @@ Eigen::Vector2d MyManipulator2D::getJointLocation(const amp::ManipulatorState& s
         cumulative_angle += state(i);  // Accumulate joint angles up to joint i
         joint_positions.push_back(current_position);
         // Print debug info for each joint
-        std::cout << "Joint " << i << " position: (" << current_position.x() << ", " << current_position.y() << ")" << std::endl;
+        //std::cout << "Joint " << i << " position: (" << current_position.x() << ", " << current_position.y() << ")" << std::endl;
         // Link length for the current link
         double link_length = m_link_lengths[i];
 
@@ -124,7 +124,7 @@ amp::ManipulatorState MyManipulator2D::getConfigurationFromIK(const Eigen::Vecto
     amp::ManipulatorState joint_angles(3);
     joint_angles << angle1_1, angle2_1, angle3_1;
     for (int i = 0; i < joint_angles.size(); i++) {
-        std::cout << "joint_angles(" << i << ") = " << joint_angles(i) << std::endl;
+        //std::cout << "joint_angles(" << i << ") = " << joint_angles(i) << std::endl;
     }
 
     // amp::ManipulatorState joint_angles_2(3);

@@ -20,8 +20,8 @@ using namespace amp;
 int main(int argc, char** argv) {
     /* Include this line to have different randomized environments every time you run your code (NOTE: this has no affect on grade()) */
     amp::RNG::seed(amp::RNG::randiUnbounded());
-
-    MyManipulator2D manipulator;
+    std::vector<double> link_lengths1 = {0.5, 1.0, 0.5};
+    MyManipulator2D manipulator(link_lengths1);
 
     // You can visualize your manipulator given an angle state like so:
     amp::ManipulatorState test_state(3);  // 
@@ -30,8 +30,8 @@ int main(int argc, char** argv) {
     Visualizer::makeFigure(manipulator, test_state); 
 
 
-    std::vector<double> link_lengths = {1.0, 0.5, 1.0};
-    MyManipulator2D manipulator_2b(link_lengths);
+    std::vector<double> link_lengths2 = {1.0, 0.5, 1.0};
+    MyManipulator2D manipulator_2b(link_lengths2);
 
     // Print link lengths to verify
     std::cout << "Link lengths before IK: ";
@@ -53,11 +53,12 @@ int main(int argc, char** argv) {
     Visualizer::makeFigure(manipulator_2b, test_IK_state); 
 
     // Create the collision space constructor
-    std::size_t n_cells = 80;
+    std::size_t n_cells = 1000;
     MyManipulatorCSConstructor cspace_constructor(n_cells);
-
+    std::vector<double> link_lengths3 = {1.0, 1.0};
+    MyManipulator2D manipulator_2c(link_lengths3);
     // Create the collision space using a given manipulator and environment
-    std::unique_ptr<amp::GridCSpace2D> cspace = cspace_constructor.construct(manipulator, HW4::getEx3Workspace2());
+    std::unique_ptr<amp::GridCSpace2D> cspace = cspace_constructor.construct(manipulator_2c, HW4::getEx3Workspace2());
 
     // You can visualize your cspace 
     Visualizer::makeFigure(*cspace);
