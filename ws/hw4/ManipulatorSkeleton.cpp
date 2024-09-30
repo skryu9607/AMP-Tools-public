@@ -81,10 +81,6 @@ amp::ManipulatorState MyManipulator2D::getConfigurationFromIK(const Eigen::Vecto
 
     amp::ManipulatorState joint_angles_2(2);
     joint_angles_2 << angle1_2, angle2_2;
-
-    //joint_angles.push_back(joint_angles_1); 
-    //joint_angles.push_back(joint_angles_2); 
-
     return joint_angles_1;
 
     } 
@@ -96,11 +92,6 @@ amp::ManipulatorState MyManipulator2D::getConfigurationFromIK(const Eigen::Vecto
     double total_angle = M_PI/6;
     double X = end_x - a3 * cos(total_angle);
     double Y = end_y - a3 * sin(total_angle);
-    // std::cout << "end_x = " << end_x << std::endl;
-    // std::cout << "end_y = " << end_y << std::endl;
-    // std::cout << cos(total_angle) << std::endl;
-    // std::cout << "X = " << X << std::endl;
-    // std::cout << "Y = " << Y << std::endl;
     // For angle 2
     double cos_value2_1 = 1/(2*a1*a2) * ((X * X+ Y * Y) - (a1 * a1 + a2 * a2)) ;
     double sin_value2_1 = sqrt(1 - cos_value2_1 * cos_value2_1); 
@@ -123,15 +114,6 @@ amp::ManipulatorState MyManipulator2D::getConfigurationFromIK(const Eigen::Vecto
 
     amp::ManipulatorState joint_angles(3);
     joint_angles << angle1_1, angle2_1, angle3_1;
-    for (int i = 0; i < joint_angles.size(); i++) {
-        //std::cout << "joint_angles(" << i << ") = " << joint_angles(i) << std::endl;
-    }
-
-    // amp::ManipulatorState joint_angles_2(3);
-    // joint_angles_2 << angle1_2, angle2_2, angle3_2;
-
-    //joint_angles.push_back(joint_angles_1); 
-    //joint_angles.push_back(joint_angles_2); 
 
         return joint_angles;
     } else {
