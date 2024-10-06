@@ -28,9 +28,7 @@ int main(int argc, char** argv) {
     std::cout << "Initial point: (" << prob.q_init[0] << ", " << prob.q_init[1] << ")" << std::endl;
     std::cout << "Goal point: (" << prob.q_goal[0] << ", " << prob.q_goal[1] << ")" << std::endl;
     // Visualize your potential function
-    //amp::Visualizer::makeFigure(potential_function, prob, 50,true);
-   // amp::Visualizer::makeFigure(potential_function, prob.x_min, prob.x_max, prob.y_min, prob.y_max, 50,true);
-    amp::Visualizer::makeFigure(potential_function, prob.x_min, prob.x_max, prob.y_min, prob.y_max, 200);
+    amp::Visualizer::makeFigure(MyPotentialFunction{}, prob, 50);
     Visualizer::showFigures();
     
     // Arguments following argv correspond to the constructor arguments of MyGDAlgorithm:
