@@ -64,6 +64,7 @@
         "type_traits": "cpp",
         "memory_resource": "cpp",
         "functional": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "filesystem": "cpp"
     }
 }

@@ -9,7 +9,6 @@
 
 namespace amp { 
 
-
 /// @brief 2D workspace with rectangular bounds and obstacles
 struct Environment2D {
     double x_min = 0.0; 
