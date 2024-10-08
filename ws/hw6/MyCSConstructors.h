@@ -57,4 +57,3 @@ class MyWaveFrontAlgorithm : public amp::WaveFrontAlgorithm {
         virtual amp::Path2D planInCSpace(const Eigen::Vector2d& q_init, const Eigen::Vector2d& q_goal, const amp::GridCSpace2D& grid_cspace, bool isManipulator) override;
 
 };
-

@@ -20,6 +20,7 @@ int main(int argc, char** argv) {
     
     // Construct point-agent and manipulator cspace instances.
     std::size_t n_cells = 5;
+    // Two c-space. 
     std::shared_ptr<MyPointAgentCSConstructor> point_agent_ctor = std::make_shared<MyPointAgentCSConstructor>(n_cells);
     std::shared_ptr<MyManipulatorCSConstructor> manipulator_ctor = std::make_shared<MyManipulatorCSConstructor>(n_cells);
     std::shared_ptr<WaveFrontAlgorithm> wf_algo = std::make_shared<MyWaveFrontAlgorithm>();
