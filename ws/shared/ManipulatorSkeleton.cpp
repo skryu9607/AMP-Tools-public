@@ -34,7 +34,7 @@ Eigen::Vector2d MyManipulator2D::getJointLocation(const amp::ManipulatorState& s
         cumulative_angle += state(i);  // Accumulate joint angles up to joint i
         joint_positions.push_back(current_position);
         // Print debug info for each joint
-        //std::cout << "Joint " << i << " position: (" << current_position.x() << ", " << current_position.y() << ")" << std::endl;
+        // std::cout << "Joint " << i << " position: (" << current_position.x() << ", " << current_position.y() << ")" << std::endl;
         // Link length for the current link
         double link_length = m_link_lengths[i];
 
@@ -55,7 +55,7 @@ amp::ManipulatorState MyManipulator2D::getConfigurationFromIK(const Eigen::Vecto
     double end_y = end_effector_location.y();
     const std::vector<double>& link_lengths = getLinkLengths();
     for (int i = 0; i < link_lengths.size(); i++) {
-        std::cout << "LinkLengths(" << i << ") = " << link_lengths[i] << std::endl;
+        //std::cout << "LinkLengths(" << i << ") = " << link_lengths[i] << std::endl;
     }
     amp::ManipulatorState joint_angles;
     // If you have different implementations for 2/3/n link manipulators, you can separate them here

@@ -15,11 +15,12 @@ int main(int argc, char** argv) {
 
     // You will need your 2-link manipulator from HW4
     MyManipulator2D manipulator;
-    Problem2D point_problem = HW2::getWorkspace1();
-    Problem2D manip_problem = HW6::getHW4Problem2();
+   Problem2D point_problem = HW2::getWorkspace1();
+    //Problem2D point_problem = HW5::getWorkspace1();
+    Problem2D manip_problem = HW6::getHW4Problem3();
     
     // Construct point-agent and manipulator cspace instances.
-    std::size_t n_cells = 5;
+    std::size_t n_cells = 100;
     // Two c-space. 
     std::shared_ptr<MyPointAgentCSConstructor> point_agent_ctor = std::make_shared<MyPointAgentCSConstructor>(n_cells);
     std::shared_ptr<MyManipulatorCSConstructor> manipulator_ctor = std::make_shared<MyManipulatorCSConstructor>(n_cells);
@@ -46,6 +47,6 @@ int main(int argc, char** argv) {
 
     Visualizer::showFigures();
 
-    amp::HW6::grade<PointWaveFrontAlgorithm, ManipulatorWaveFrontAlgorithm, MyAStarAlgo>("yusif.razzaq@colorado.edu", argc, argv, std::make_tuple(wf_algo, point_agent_ctor), std::make_tuple(wf_algo, manipulator_ctor), std::make_tuple());
+    amp::HW6::grade<PointWaveFrontAlgorithm, ManipulatorWaveFrontAlgorithm, MyAStarAlgo>("seungkeol.ryu@colorado.edu", argc, argv, std::make_tuple(wf_algo, point_agent_ctor), std::make_tuple(wf_algo, manipulator_ctor), std::make_tuple());
     return 0;
 }

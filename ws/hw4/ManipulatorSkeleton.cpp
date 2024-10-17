@@ -34,7 +34,6 @@ Eigen::Vector2d MyManipulator2D::getJointLocation(const amp::ManipulatorState& s
         cumulative_angle += state(i);  // Accumulate joint angles up to joint i
         joint_positions.push_back(current_position);
         // Print debug info for each joint
-        //std::cout << "Joint " << i << " position: (" << current_position.x() << ", " << current_position.y() << ")" << std::endl;
         // Link length for the current link
         double link_length = m_link_lengths[i];
 
