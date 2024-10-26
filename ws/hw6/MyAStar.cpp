@@ -43,7 +43,7 @@ MyAStarAlgo::GraphSearchResult MyAStarAlgo::search(const amp::ShortestPathProble
     std::priority_queue<std::pair<double, int>, std::vector<std::pair<double, int>>, std::greater<>> open_set;
     std::unordered_map<int, NodeInfo> node_info;  // 각 노드의 비용 정보 저장
     std::unordered_set<int> closed_set;           // 탐색 완료된 노드 추적
-
+    
     // 시작 노드 설정
     initialize_start_node(problem.init_node, heuristic, node_info, open_set, problem.goal_node);
     int i = 0;
