@@ -14,10 +14,20 @@
 class MyCentralPlanner : public amp::CentralizedMultiAgentRRT {
     public:
         virtual amp::MultiAgentPath2D plan(const amp::MultiAgentProblem2D& problem) override; 
+        size_t getNodePositionSize() const;
+    private:
+    std::unordered_map<int, Eigen::VectorXd> nodePositions;
 };
 
 
 class MyDecentralPlanner : public amp::DecentralizedMultiAgentRRT {
     public:
         virtual amp::MultiAgentPath2D plan(const amp::MultiAgentProblem2D& problem) override;
+        amp::Path2D rrtplan(
+    const amp::Problem2D& problem, 
+    const std::vector<std::vector<Eigen::Vector2d>>& dynamicObstacles,
+    double minDist,size_t maxiterations);
+        size_t getNodePositionSize() const;
+    private:
+    std::unordered_map<int, Eigen::VectorXd> nodePositions;
 };

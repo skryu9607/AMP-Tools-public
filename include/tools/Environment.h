@@ -44,7 +44,7 @@ struct Problem2D : Environment2D {
 
 struct CircularAgentProperties {
     /// @brief Radius of the circular agent
-    double radius = 1.0;
+    double radius = 0.5;
 
     /// @brief Initial location
     Eigen::Vector2d q_init;

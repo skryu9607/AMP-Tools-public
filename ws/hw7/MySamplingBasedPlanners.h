@@ -34,8 +34,8 @@ class MyRRT : public amp::GoalBiasRRT2D {
 private:
     std::unordered_map<int, Eigen::Vector2d> nodes; // Stores node ID and its position
     std::vector<std::pair<int, int>> edges; // Stores pairs of connected node IDs
-    double p_goal;  // 확률
-    double stepsize; // 스텝 사이즈
+    double p_goal;  
+    double stepsize; 
 
 public:
     // Constructor
@@ -43,8 +43,8 @@ public:
 
     // Set parameters
     void setParameters(double p, double r) {
-        p_goal = p; // 수정: 멤버 변수 설정
-        stepsize = r; // 수정: 멤버 변수 설정
+        p_goal = p; 
+        stepsize = r; 
     }
 
     void addNode(int nodeId, const Eigen::Vector2d& position);

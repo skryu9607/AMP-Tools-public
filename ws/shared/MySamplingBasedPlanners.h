@@ -6,12 +6,12 @@
 // Include the correct homework headers
 #include "hw/HW7.h"
 
-class MyPRM : public amp::PRM2D {
-    public:
-        virtual amp::Path2D plan(const amp::Problem2D& problem) override; 
-};
+// class MyPRM : public amp::PRM2D {
+//     public:
+//         virtual amp::Path2D plan(const amp::Problem2D& problem) override; 
+// };
 
-class MyRRT : public amp::GoalBiasRRT2D {
-    public:
-        virtual amp::Path2D plan(const amp::Problem2D& problem) override; 
-};
+// class MyRRT : public amp::GoalBiasRRT2D {
+//     public:
+//         virtual amp::Path2D plan(const amp::Problem2D& problem) override; 
+// };
