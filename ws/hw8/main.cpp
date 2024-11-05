@@ -35,62 +35,6 @@ void timer_example() {
     std::cout << "Total time elapsed: " << Profiler::getTotalProfile("timer") << std::endl;
 }
 
-void benchmarkPlanner(size_t numAgents, size_t numRuns, double stepSize, double goalBiasProb, size_t maxIterations, double epsilon) {
-    std::vector<double> computationTimes;
-    std::vector<size_t> treeSizes;
-
-    for (size_t i = 0; i < numRuns; ++i) {
-        MultiAgentProblem2D problem = HW8::getWorkspace1(numAgents);
-        
-        MyCentralPlanner central_planner;
-        auto start = std::chrono::high_resolution_clock::now();
-
-        MultiAgentPath2D path = central_planner.plan(problem);
-        auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> computationTime = end - start;
-
-        // computation time 기록
-        computationTimes.push_back(computationTime.count());
-
-        // RRT 트리의 노드 개수 기록
-        treeSizes.push_back(central_planner.getNodePositionSize()); 
-    }
-
-    // 결과를 파일로 저장
-    std::ofstream outFile("/Users/seung/MotionPlanning/AMP_new/AMP-Tools-public/benchmark_results_agents_" + std::to_string(numAgents) + ".csv");
-    outFile << "ComputationTime,TreeSize\n";
-    for (size_t i = 0; i < numRuns; ++i) {
-        outFile << computationTimes[i] << "," << treeSizes[i] << "\n";
-    }
-    outFile.close();
-    std::cout << "Benchmark for " << numAgents << " agents completed. Data saved to benchmark_results_agents_" << numAgents << ".csv\n";
-}
-void benchmarkDecentralizedPlanner(size_t numAgents, size_t numRuns, double stepSize, double goalBiasProb, size_t maxIterations, double epsilon) {
-    std::vector<double> computationTimes;
-
-    for (size_t i = 0; i < numRuns; ++i) {
-        MultiAgentProblem2D problem = HW8::getWorkspace1(numAgents);
-        
-        MyDecentralPlanner decentralized_planner;
-        auto start = std::chrono::high_resolution_clock::now();
-
-        MultiAgentPath2D path = decentralized_planner.plan(problem);
-        auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> computationTime = end - start;
-
-        // computation time 기록
-        computationTimes.push_back(computationTime.count());
-    }
-
-    // 결과를 파일로 저장
-    std::ofstream outFile("/Users/seung/MotionPlanning/AMP_new/AMP-Tools-public/decentralized_benchmark_results_agents_" + std::to_string(numAgents) + ".csv");
-    outFile << "ComputationTime\n";
-    for (size_t i = 0; i < numRuns; ++i) {
-        outFile << computationTimes[i] << "\n";
-    }
-    outFile.close();
-    std::cout << "Benchmark for " << numAgents << " agents completed. Data saved to decentralized_benchmark_results_agents_" << numAgents << ".csv\n";
-}
 int main(int argc, char** argv) {
     // Run timer example (useful for benchmarking)
     //timer_example();
@@ -118,7 +62,7 @@ int main(int argc, char** argv) {
 
     // Solve using a centralized approach
     MyCentralPlanner central_planner;
-    MultiAgentPath2D path = central_planner.plan(problem);
+    path = central_planner.plan(problem);
     bool isValid = HW8::check(path, problem, collision_states);
 
     Visualizer::makeFigure(problem, path, collision_states);
